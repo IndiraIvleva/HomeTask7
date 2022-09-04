@@ -132,16 +132,77 @@ public class MyMetods
             for (int i = 0; i < array.GetLength(0); i++)
             {
                 sum[j] += array[i, j];
-                
+
             }
             sum[j] = sum[j] / array.GetLength(0);
             Write($"{sum[j]:f1}; ");
-            
+
         }
     }
 
-
-
-
-
+    public static void GetSort(int[,] mass)
+    {
+        for (int i = 0; i < mass.GetLength(0); i++)
+        {
+            for (int j = 0; j < mass.GetLength(1); j++)
+            {
+                for (int k = j + 1; k < mass.GetLength(1); k++)
+                {
+                    if (mass[i, j] < mass[i, k])
+                    {
+                        int temp = mass[i, j];
+                        mass[i, j] = mass[i, k];
+                        mass[i, k] = temp;
+                    }
+                }
+            }
+        }
     }
+
+    public static int[] FindSumInRow(int[,] array)
+    {
+        int[] result = new int[array.GetLength(0)];
+        for (int i = 0; i < array.GetLength(0); i++)
+        {
+            int sum = 0;
+            for (int j = 0; j < array.GetLength(1); j++)
+            {
+                sum += array[i, j];
+            }
+            result[i] = sum;
+        }
+        return result;
+    }
+
+    public static void FindMinRow(int[] array)
+    {
+        int min = array[0];
+        int index = 0;
+            for (int i = 0; i < array.Length; i++)
+            {
+                if (min >= array[i])
+                {
+                min = array[i];
+                index = i+1;
+                }
+            }
+        WriteLine($"Номер строки с наименьшей суммой элементов: {index}");
+    }
+
+public static int[,] MultArray(int[,] array1, int[,] array2)
+{
+    int[,] result = new int[array1.GetLength(0), array2.GetLength(1)];
+    for (int i = 0; i < result.GetLength(0); i++)
+    {
+        for (int j = 0; j < result.GetLength(1); j++)
+        {
+            for (int k = 0; k < array1.GetLength(1); k++)
+            {
+                result[i, j] += array1[i, k] * array2[k, j];
+            }
+        }
+    }
+    return result;
+}
+
+}
